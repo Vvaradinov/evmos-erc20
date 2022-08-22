@@ -31,11 +31,6 @@ func TestObtainClient(t *testing.T) {
 		})
 	}
 
-	// Test with a valid rpcUrl
-	_, err := ObtainClient("http://localhost:8545")
-	if err != nil {
-		t.Errorf("ObtainClient() error = %v", err)
-	}
 }
 
 func TestObtainClientAndTxSigner(t *testing.T) {

@@ -1,7 +1,6 @@
 package erc20_client
 
 import (
-	"github.com/ethereum/go-ethereum/core/types"
 	"math/big"
 	"reflect"
 	"testing"
@@ -50,12 +49,12 @@ func TestQueryBalance(t *testing.T) {
 }
 
 func TestTransfer(t *testing.T) {
-	success := types.ReceiptStatusSuccessful
+	//success := types.ReceiptStatusSuccessful
 	//fail := types.ReceiptStatusFailed
 	tests := []struct {
 		name         string
 		contractAddr string
-		fromAddr     string
+		fromPK       string
 		toAddr       string
 		amount       string
 		wantStatus   *uint64
@@ -63,37 +62,23 @@ func TestTransfer(t *testing.T) {
 		{
 			name:         "Test with empty strings",
 			contractAddr: "",
-			fromAddr:     "",
+			fromPK:       "",
 			toAddr:       "",
 			amount:       "",
 			wantStatus:   nil,
 		}, {
 			name:         "Test with missing addresses",
 			contractAddr: "",
-			fromAddr:     "",
+			fromPK:       "",
 			toAddr:       "",
 			amount:       "100000",
-			wantStatus:   nil,
-		}, {
-			name:         "Test with valid contract addr, enough balance, and valid from and to addresses",
-			contractAddr: "0xBd7D4f6576c4e14470b0294649d4236a590E2258",
-			fromAddr:     "0x6E10Cb19697B915C7e7F669Fd1Ced0193B879016",
-			toAddr:       "0x6175270C6dfc17C772EEf5170d663342C9482Da7",
-			amount:       "100000",
-			wantStatus:   &success,
-		}, {
-			name:         "Test without sufficient balance to transfer",
-			contractAddr: "0xBd7D4f6576c4e14470b0294649d4236a590E2258",
-			fromAddr:     "0x6E10Cb19697B915C7e7F669Fd1Ced0193B879016",
-			toAddr:       "0x6175270C6dfc17C772EEf5170d663342C9482Da7",
-			amount:       "100000000000000000000000000000000000000000",
 			wantStatus:   nil,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			status, _ := Transfer(tt.contractAddr, tt.fromAddr, tt.toAddr, tt.amount)
+			status, _ := Transfer(tt.contractAddr, tt.fromPK, tt.toAddr, tt.amount)
 			if !reflect.DeepEqual(status, tt.wantStatus) {
 				t.Errorf("Transfer() = %v, want %v", status, tt.wantStatus)
 			}

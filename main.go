@@ -7,13 +7,10 @@ import (
 	"os"
 )
 
+// Main entry point for the commands available for this program
+// It parses the command line arguments and calls the appropriate function.
+// Available commands: deployContract, balanceOf, transfer
 func main() {
-	const contractAddr = "0x0f2832522dC01C8dF87c6aE007EC10d06a7335db"
-	const userVladPK = "D55B4BD2106C8691298B8A110F734CE7353A2CFBCECFD698028DEF752451AF6E"
-	const userVlad = "0x161e373958716Dc16Efb4659CE80f926EC0399a2"
-	const userNick = "0x58BA2585E068720D989FC2DC2DF991C5DA3DA7C0"
-	const erc20Contract = "0x4022411E2bd4b19E7EFc474Bb620db2209C7F5Fa"
-
 	argsWithoutProg := os.Args[1:]
 
 	// Deploy contract command

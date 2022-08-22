@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-const userPK = "D55B4BD2106C8691298B8A110F734CE7353A2CFBCECFD698028DEF752451AF6E"
+// Replace with the values from running the utility script keys.utils.sh
+const vladWalletPK = "9C5D6AB6AF650D0DB0DEB2347E50B72E0B4AF1E83D61589253BCE92C69192072"
 
 var auth *bind.TransactOpts
 var client *ethclient.Client
@@ -24,7 +25,7 @@ func TestERC20Deployer(t *testing.T) {
 
 // Obtaining client and auth, deploying contract and waiting for the block to be confirmed.
 var _ = BeforeSuite(func() {
-	auth, client, _ = utils.ObtainClientAndTxSigner("http://localhost:8545", userPK)
+	auth, client, _ = utils.ObtainClientAndTxSigner("http://localhost:8545", vladWalletPK)
 })
 
 // Close client after the tests are done
