@@ -40,6 +40,7 @@ sending each other tokens.
 │   ├── data
 │   └── keyring-test
 ├── init.sh // Script used to start a local node and create user keys     
+├── keys_util.sh // Script used to easily view user Hex addresses and Private Keys     
 ├── main.go // Main entry point for the application where all the commands are
 ├── go.mod     
 ├── package.json
