@@ -40,7 +40,7 @@ func TestObtainClientAndTxSigner(t *testing.T) {
 		userPK     string
 		wantClient *ethclient.Client
 		wantAuth   *bind.TransactOpts
-	}{s
+	}{
 		{
 			name:       "Test with missing private key and missing rpc url",
 			rpcUrl:     "",
