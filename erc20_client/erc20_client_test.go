@@ -49,8 +49,6 @@ func TestQueryBalance(t *testing.T) {
 }
 
 func TestTransfer(t *testing.T) {
-	//success := types.ReceiptStatusSuccessful
-	//fail := types.ReceiptStatusFailed
 	tests := []struct {
 		name         string
 		contractAddr string
@@ -69,6 +67,14 @@ func TestTransfer(t *testing.T) {
 		}, {
 			name:         "Test with missing addresses",
 			contractAddr: "",
+			fromPK:       "",
+			toAddr:       "",
+			amount:       "100000",
+			wantStatus:   nil,
+		},
+		{
+			name:         "Test with missing fromPK and toAddr",
+			contractAddr: "0x6175270C6dfc17C772EEf5170d663342C9482Da7",
 			fromPK:       "",
 			toAddr:       "",
 			amount:       "100000",

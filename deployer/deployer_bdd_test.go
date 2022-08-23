@@ -13,7 +13,7 @@ import (
 )
 
 // Replace with the values from running the utility script keys.utils.sh
-const vladWalletPK = "9C5D6AB6AF650D0DB0DEB2347E50B72E0B4AF1E83D61589253BCE92C69192072"
+const vladWalletPK = "37B578A789DF7A4D842A5F2934363FF811EDAFBC8F855880C2F3D9B20F757EF7"
 
 var auth *bind.TransactOpts
 var client *ethclient.Client

@@ -8,7 +8,7 @@ LOGLEVEL="info"
 HOME_DIR="/mnt/c/evmos/evmos-erc20/node"
 
 # Create the initial chain configuration
-evmosd init $MONIKER --chain-id=$CHAINID --overwrite --home=$HOME_DIR
+evmosd init $MONIKER --chain-id=$CHAINID --overwrite --home=$HOME_DIR --log_level=$LOGLEVEL
 
 # Add my personal key to the keyring
 evmosd keys add $KEY_VLAD --keyring-backend test --home=$HOME_DIR

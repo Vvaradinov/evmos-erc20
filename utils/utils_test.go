@@ -13,7 +13,7 @@ func TestObtainClient(t *testing.T) {
 		want *ethclient.Client
 	}{
 		{
-			name: "Test with missing address empty string",
+			name: "Test with missing url",
 			url:  "",
 			want: nil,
 		},
@@ -40,7 +40,7 @@ func TestObtainClientAndTxSigner(t *testing.T) {
 		userPK     string
 		wantClient *ethclient.Client
 		wantAuth   *bind.TransactOpts
-	}{
+	}{s
 		{
 			name:       "Test with missing private key and missing rpc url",
 			rpcUrl:     "",

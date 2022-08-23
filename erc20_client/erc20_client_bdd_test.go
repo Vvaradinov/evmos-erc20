@@ -1,6 +1,7 @@
 package erc20_client
 
 import (
+	"fmt"
 	vladcoin "github.com/Vvaradinov/evmos-erc20/contracts"
 	"github.com/Vvaradinov/evmos-erc20/utils"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -15,10 +16,10 @@ import (
 
 // Some constant values
 // Replace with the values from running the utility script keys.utils.sh
-const vladWalletPK = "9C5D6AB6AF650D0DB0DEB2347E50B72E0B4AF1E83D61589253BCE92C69192072"
-const nickWalletPK = "FC3C7A7A4BA2B789C8149D949A8F34FEE9C0BBE4E3C42BAFB470D1323F397D80"
-const vladWalletAddr = "9D8D9B796C20CEBF62337FF3A4019DF0917FCD41"
-const nickWalletAddr = "93C54D4F2DD49FF712EE3C7CABF1634926CA046F"
+const vladWalletPK = "37B578A789DF7A4D842A5F2934363FF811EDAFBC8F855880C2F3D9B20F757EF7"
+const nickWalletPK = "61B3FC80506EF07D526917D3E3495E60946FDF3C79F3FEBD8CE125B150B2F796"
+const vladWalletAddr = "9920E564CB9CDC444218B77B01A01CC6F92A9B2B"
+const nickWalletAddr = "384A3B4885A891246F19315C7DFB00A3AC3ADB74"
 
 // Some variables to be initialized before the tests
 var tokenTransferAmount = big.NewInt(50000000)
@@ -38,6 +39,7 @@ func TestERC20(t *testing.T) {
 var _ = BeforeSuite(func() {
 	auth, client, _ = utils.ObtainClientAndTxSigner("http://localhost:8545", vladWalletPK)
 	contractAddr, _, _, _ = vladcoin.DeployVladToken(auth, client)
+	fmt.Println("The new contract address is: ", contractAddr.Hex())
 	time.Sleep(time.Second * 5)
 })
 
@@ -46,8 +48,8 @@ var _ = AfterSuite(func() {
 	client.Close()
 })
 
-// BDD tests for query balance functionality of ERC20
-var _ = Describe("Query Balance ERC20", func() {
+var _ = Describe("ERC20 Token Operations", func() {
+	// Case when the contract is first initialized and the balances for Nick are 0 and Vlad holds the entire token supply
 	Context("Query the balance of Vlad and Nick after initialization", func() {
 		It("Should return a balance of 10000000000000000000000000000 for Vlad", func() {
 			vladBalance, _ := QueryBalance(contractAddr.Hex(), vladWalletAddr)
@@ -57,12 +59,8 @@ var _ = Describe("Query Balance ERC20", func() {
 			nickBalance, _ := QueryBalance(contractAddr.Hex(), nickWalletAddr)
 			Expect(nickBalance.String()).To(Equal("0"))
 		})
-
 	})
-})
 
-// BDD tests for transfer functionality of ERC20 tokens
-var _ = Describe("Transfer ERC20", func() {
 	// Case when the sender user has enough balance to transfer
 	Context("User has sufficient balance to transfer", func() {
 		BeforeEach(func() {
